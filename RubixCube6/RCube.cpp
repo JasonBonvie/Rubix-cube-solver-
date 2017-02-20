@@ -1015,11 +1015,14 @@ void RCube::Solve(void) {
 	SolveCWhite((char*) "gw");
 	SolveCWhite((char*) "ow");
 	SolveCWhite((char*) "bw");
+
+	cout << "";
 	SolveWhiteCC((char*) "wrg", (char*) "rwg", (char*) "grw");
 	SolveWhiteCC((char*) "wgo", (char*) "gwo", (char*) "ogw");
 	SolveWhiteCC((char*) "wob", (char*) "owb", (char*) "bow");
 	SolveWhiteCC((char*) "wbr", (char*) "bwr", (char*) "rbw");
 
+	cout << "";
 	SolveCC((char*) "rg", (char*) "gr");
 	SolveCC((char*) "go", (char*) "og");
 	SolveCC((char*) "ob", (char*) "bo");
