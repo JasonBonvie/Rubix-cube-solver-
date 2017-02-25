@@ -99,6 +99,9 @@ class Cube {
         //outputs the cube as a map with directions
         //relating to 2d char array of each face.
         std::map<char, charArray> getCube();
+        //The inverse of getCube, ability set the
+        //cube to any configuration. 
+        void setCube(std::map<char, charArray> cubeMap);
         //Basic Cube turns.
         void L();
         void R();

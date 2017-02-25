@@ -161,6 +161,20 @@ void Cube::UD(int index) {
     }
 }
 
+void Cube::setCube(std::map <char, charArray> cubeMap) {
+    std::map <char, charArray> out;
+    for (int i=0; i<3; i++) {
+        for (int j=0; j<3; j++) {
+            cubeArr[i][0][j].colorDat['U'] = cubeMap['U'][i][j];
+            cubeArr[i][2][j].colorDat['D'] = cubeMap['D'][i][j];
+            cubeArr[i][j][0].colorDat['L'] = cubeMap['L'][i][j];
+            cubeArr[i][j][2].colorDat['R'] = cubeMap['R'][i][j];
+            cubeArr[0][i][j].colorDat['F'] = cubeMap['F'][i][j];
+            cubeArr[2][i][j].colorDat['B'] = cubeMap['B'][i][j];
+        }
+    }
+}
+
 std::map <char, charArray> Cube::getCube() {
     std::map <char, charArray> out;
     charArray base(3, std::vector<char> (3, '0'));
@@ -178,7 +192,7 @@ std::map <char, charArray> Cube::getCube() {
             out['R'][i][j] = cubeArr[i][j][2].colorDat['R'];
             out['F'][i][j] = cubeArr[0][i][j].colorDat['F'];
             out['B'][i][j] = cubeArr[2][i][j].colorDat['B'];
-            }
+        }
     }
     return out;
 }
