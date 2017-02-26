@@ -12,7 +12,7 @@
     The Cube object contains a 3 dimensional array of nodes,
     with the (0,0,0) origin at the top left corner of the cube.
     There are methods to move the cube and to get a standard
-    representation of the cube's state. 
+    representation of the cube's state.
 
     the colors are represented by the characters and are
     initially set to the directions as follows
@@ -26,7 +26,7 @@
      b - B
 
     This notation for absolute cube direction also is
-    used for turns. This notation will be used for 
+    used for turns. This notation will be used for
     function calls, for example L() is a 90* clockwise
     turn of the left face. See google for further notation
     info.
@@ -59,20 +59,20 @@ class Node {
         void UDClock(); // Up/Down clockwise node shift
         void FBClock(); // Forward/Backward clockwise node shift
         //To replace the color data of a node.
-        void setColors(std::map<char, char> cmap); 
+        void setColors(std::map<char, char> cmap);
         //To get the color map of a node.
         std::map<char, char> getColors();
 };
 
 class Cube {
-    /*  
+    /*
      *  The basic algorithim for the turns is
      *
      *  Node color shift for each node in slice
      *  take color data of said slice in 3x3 array
      *  put color data into each node 90* clockwise
      *
-     *  see one of the turn functions (LR, UD, FB) for 
+     *  see one of the turn functions (LR, UD, FB) for
      *  specifics.
      *
      *
@@ -100,7 +100,7 @@ class Cube {
         //relating to 2d char array of each face.
         std::map<char, charArray> getCube();
         //The inverse of getCube, ability set the
-        //cube to any configuration. 
+        //cube to any configuration.
         void setCube(std::map<char, charArray> cubeMap);
         //Basic Cube turns.
         void L();

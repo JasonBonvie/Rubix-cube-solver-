@@ -183,7 +183,7 @@ std::map <char, charArray> Cube::getCube() {
     out['F'] = base;
     out['B'] = base;
     out['L'] = base;
-    out['R'] = base; 
+    out['R'] = base;
     for (int i=0; i<3; i++) {
         for (int j=0; j<3; j++) {
             out['U'][i][j] = cubeArr[i][0][j].colorDat['U'];
@@ -199,7 +199,7 @@ std::map <char, charArray> Cube::getCube() {
 
 void Cube::printCube() {
     std::map<char, charArray> cube = getCube();
-    char keys[6] = {'U','D','L','R','F','B'}; 
+    char keys[6] = {'U','D','L','R','F','B'};
     charArray face;
     std::cout << "------\n";
     for (int i=0; i<6; i++) {

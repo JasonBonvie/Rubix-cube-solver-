@@ -90,6 +90,7 @@ RCube::RCube(void) {
 	topf = yf;
 	bottomf = wf;
 
+	// This was for testing only
 	/**rf->Get(0) = 'k';
 	*gf->Get(0) = 'l';
 	*of->Get(0) = 'm';
@@ -97,6 +98,7 @@ RCube::RCube(void) {
 	*yf->Get(0) = 'i';
 	*wf->Get(0) = 'j';*/
 
+	// Set the relative turning functions
 	left = &RCube::Blue;
 	right = &RCube::Green;
 	top = &RCube::Yellow;
@@ -104,6 +106,7 @@ RCube::RCube(void) {
 	front = &RCube::Red;
 	back = &RCube::Orange;
 
+	// Set naming conventions for variables
 	ShiftToNameAbsolute = new map<ShiftArray*, char>();
 	ShiftToNameAbsolute->insert(make_pair(rf, 'r'));
 	ShiftToNameAbsolute->insert(make_pair(bf, 'b'));
@@ -120,6 +123,7 @@ RCube::RCube(void) {
 	ShiftToNameRelative->insert(make_pair(topf, 't'));
 	ShiftToNameRelative->insert(make_pair(bottomf, 'b'));
 
+	// Matrix maps for solving the yellow face in the last step
 	MatrixMap = new std::map<bool*, Callback>();
 	/*
 	0 0 1
@@ -372,8 +376,39 @@ RCube::RCube(void) {
 	MatrixMap->insert(make_pair(new bool[8] {
 		1, 1, 0, 1, 1, 1, 0, 1
 	}, &RCube::Algorithm2));
+
+	/*
+	0 0 0
+	1   1
+	0 0 0
+	*/
+	MatrixMap->insert(make_pair(new bool[8] {
+		0, 0, 0, 1, 0, 0, 0, 1
+	}, &RCube::Algorithm1));
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// =============================================================================================================================================
+// Top Solving Algorithms ---------------------------------------------------------------------------------------------------------------------------------
+// =============================================================================================================================================
 void RCube::Algorithm1(void) {
 	//cout << "Algorithm1" << endl;
 
@@ -547,7 +582,22 @@ void RCube::Algorithm5(void) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+// =============================================================================================================================================
+// Top Solving ---------------------------------------------------------------------------------------------------------------------------------
+// =============================================================================================================================================
 void RCube::OrientAllPieces(void) {
+	// Orient the pieces on the yellow face for solving the top
 	map<bool*, Callback>::iterator it;
 	bool* matrix;
 	bool match;
@@ -605,6 +655,7 @@ void RCube::OrganizeTopCorners(char side, char* piece1, char* piece2) {
 }
 
 int RCube::GetLocationOnYellow(char* piece) {
+	// Gets the location of a given piece exclusively on the yellow face
 	if (piece[2] == '\0') {
 		char tempPiece[3];
 		tempPiece[0] = piece[0];
@@ -649,6 +700,7 @@ int RCube::GetLocationOnYellow(char* piece) {
 }
 
 void RCube::SwitchTopCorners(char* piece) {
+	// Switching edge pieces to solve the yellow side
 	RotateHUntil(piece[0]);
 
 	if (GetLocationOnYellow(piece) == 6) {
@@ -718,7 +770,7 @@ void RCube::SwitchTopMids(char* piece) {
 }
 
 void RCube::SolveTop(void) {
-
+	// Holds the basic fomat for solving the yellow face
 	OrganizeTopCorners('b', (char*) "ybr", (char*) "ybo");
 	OrganizeTopCorners('r', (char*) "yrg", (char*) "ybr");
 
@@ -759,7 +811,9 @@ void RCube::SolveTop(void) {
 
 
 
-
+// =============================================================================================================================================
+// First and Second Row Solving ----------------------------------------------------------------------------------------------------------------
+// =============================================================================================================================================
 void RCube::SolveWhiteCC(char* white, char* color1, char* color2) {
 	int location[2];
 	GetLocation(white, false, location);
@@ -1011,11 +1065,13 @@ void RCube::SolveCC(char* color1, char* color2) {
 }
 
 void RCube::Solve(void) {
+	// Holdes the basic structure for solving the first two rows
 	SolveCWhite((char*) "rw");
 	SolveCWhite((char*) "gw");
 	SolveCWhite((char*) "ow");
 	SolveCWhite((char*) "bw");
 
+	// Random cout seems to solve the heisenbug issue. Hopefully when we print the steps this can be removed
 	cout << "";
 	SolveWhiteCC((char*) "wrg", (char*) "rwg", (char*) "grw");
 	SolveWhiteCC((char*) "wgo", (char*) "gwo", (char*) "ogw");
@@ -1072,8 +1128,9 @@ void RCube::Solve(void) {
 
 
 
-
-
+// =============================================================================================================================================
+// Convenience functions -----------------------------------------------------------------------------------------------------------------------
+// =============================================================================================================================================
 void RCube::RotateHUntil(char c) {
 	while((*ShiftToNameAbsolute)[frontf] != c) RotateH(1);
 }
@@ -1119,25 +1176,25 @@ void RCube::GetLocation(char* piece, bool relative, int (&result)[2]) {
 				for (; base->Next != nullptr; base = base->Next) {
 					switch(base->i) {
 					case 0:
-						if ((*(leftf->Get(2)) == piece[1] || *(leftf->Get(2)) == piece[2]) && 
+						if ((*(leftf->Get(2)) == piece[1] || *(leftf->Get(2)) == piece[2]) &&
 							(*(topf->Get(6)) == piece[1] || *(topf->Get(6)) == piece[2])) {
 								result[0] = (*ShiftToName)[frontf]; result[1] = base->i;
 							}
 						break;
 					case 2:
-						if ((*(rightf->Get(0)) == piece[1] || *(rightf->Get(0)) == piece[2]) && 
+						if ((*(rightf->Get(0)) == piece[1] || *(rightf->Get(0)) == piece[2]) &&
 							(*(topf->Get(4)) == piece[1] || *(topf->Get(4)) == piece[2])) {
 								result[0] = (*ShiftToName)[frontf]; result[1] = base->i;
 							}
 						break;
 					case 4:
-						if ((*(rightf->Get(6)) == piece[1] || *(rightf->Get(6)) == piece[2]) && 
+						if ((*(rightf->Get(6)) == piece[1] || *(rightf->Get(6)) == piece[2]) &&
 							(*(bottomf->Get(2)) == piece[1] || *(bottomf->Get(2)) == piece[2])) {
 								result[0] = (*ShiftToName)[frontf]; result[1] = base->i;
 							}
 						break;
 					case 6:
-						if ((*(leftf->Get(4)) == piece[1] || *(leftf->Get(4)) == piece[2]) && 
+						if ((*(leftf->Get(4)) == piece[1] || *(leftf->Get(4)) == piece[2]) &&
 							(*(bottomf->Get(0)) == piece[1] || *(bottomf->Get(0)) == piece[2])) {
 								result[0] = (*ShiftToName)[frontf]; result[1] = base->i;
 							}
@@ -1157,276 +1214,6 @@ void RCube::GetLocation(char* piece, bool relative, int (&result)[2]) {
 		cout << "Sorry, the piece could not be found: " << piece[0] << " " << piece[1] << " " << piece[2] << endl;
 	} else {
 		//cout << (char) result[0] << " " << result[1] << endl;
-	}
-}
-
-void RCube::Print(void) {
-	PrintRed();
-	PrintGreen();
-	PrintOrange();
-	PrintBlue();
-	PrintYellow();
-	PrintWhite();
-}
-
-// Prints this colored side of the face 0, 0 being bottom left corner (white being top / red being front / blue being right)
-void RCube::PrintRed(void) {
-	cout << "Red";
-	if (rf == frontf) cout << " (front)";
-	else if (rf == topf) cout << " (top)";
-	else if (rf == rightf) cout << " (right)";
-	cout << endl;
-	cout << *rf->Get(0) << " " << *rf->Get(1) << " " << *rf->Get(2) << "\n";
-	cout << *rf->Get(7) << " r " << *rf->Get(3) << "\n";
-	cout << *rf->Get(6) << " " << *rf->Get(5) << " " << *rf->Get(4) << "\n";
-}
-
-void RCube::PrintBlue(void) {
-	cout << "Blue";
-	if (bf == frontf) cout << " (front)";
-	else if (bf == topf) cout << " (top)";
-	else if (bf == rightf) cout << " (right)";
-	cout << endl;
-	cout << *bf->Get(0) << " " << *bf->Get(1) << " " << *bf->Get(2) << "\n";
-	cout << *bf->Get(7) << " b " << *bf->Get(3) << "\n";
-	cout << *bf->Get(6) << " " << *bf->Get(5) << " " << *bf->Get(4) << "\n";
-}
-
-void RCube::PrintOrange(void) {
-	cout << "Orange";
-	if (of == frontf) cout << " (front)";
-	else if (of == topf) cout << " (top)";
-	else if (of == rightf) cout << " (right)";
-	cout << endl;
-	cout << *of->Get(0) << " " << *of->Get(1) << " " << *of->Get(2) << "\n";
-	cout << *of->Get(7) << " o " << *of->Get(3) << "\n";
-	cout << *of->Get(6) << " " << *of->Get(5) << " " << *of->Get(4) << "\n";
-}
-
-void RCube::PrintGreen(void) {
-	cout << "Green";
-	if (gf == frontf) cout << " (front)";
-	else if (gf == topf) cout << " (top)";
-	else if (gf == rightf) cout << " (right)";
-	cout << endl;
-	cout << *gf->Get(0) << " " << *gf->Get(1) << " " << *gf->Get(2) << "\n";
-	cout << *gf->Get(7) << " g " << *gf->Get(3) << "\n";
-	cout << *gf->Get(6) << " " << *gf->Get(5) << " " << *gf->Get(4) << "\n";
-}
-
-void RCube::PrintWhite(void) {
-	cout << "White";
-	if (wf == frontf) cout << " (front)";
-	else if (wf == topf) cout << " (top)";
-	else if (wf == rightf) cout << " (right)";
-	cout << endl;
-	cout << *wf->Get(0) << " " << *wf->Get(1) << " " << *wf->Get(2) << "\n";
-	cout << *wf->Get(7) << " w " << *wf->Get(3) << "\n";
-	cout << *wf->Get(6) << " " << *wf->Get(5) << " " << *wf->Get(4) << "\n";
-}
-
-void RCube::PrintYellow(void) {
-	cout << "Yellow";
-	if (yf == frontf) cout << " (front)";
-	else if (yf == topf) cout << " (top)";
-	else if (yf == rightf) cout << " (right)";
-	cout << endl;
-	cout << *yf->Get(0) << " " << *yf->Get(1) << " " << *yf->Get(2) << "\n";
-	cout << *yf->Get(7) << " y " << *yf->Get(3) << "\n";
-	cout << *yf->Get(6) << " " << *yf->Get(5) << " " << *yf->Get(4) << "\n";
-}
-
-void RCube::Left(int dir) {
-	(this->*left)(dir);
-}
-
-void RCube::Right(int dir) {
-	(this->*right)(dir);
-}
-
-void RCube::Top(int dir) {
-	(this->*top)(dir);
-}
-
-void RCube::Bottom(int dir) {
-	(this->*bottom)(dir);
-}
-
-void RCube::Front(int dir) {
-	(this->*front)(dir);
-}
-
-void RCube::Back(int dir) {
-	(this->*back)(dir);
-}
-
-void RCube::RotateH(int RIGHT) {
-	if (RIGHT > 0) {
-		for (int i = 0; i < RIGHT; i ++) {
-			temp = front;	tempf = frontf;
-			front = left;	frontf = leftf;
-			left = back;	leftf = backf;
-			back = right;	backf = rightf;
-			right = temp;	rightf = tempf;
-
-			bottomf->PushPointerForward2();
-			topf->PushPointerBackward2();
-		}
-	} else {
-		for (int i = 0; i < -RIGHT; i ++) {
-			temp = front;	tempf = frontf;
-			front = right;	frontf = rightf;
-			right = back;	rightf = backf;	
-			back = left;	backf = leftf;
-			left = temp; 	leftf = tempf;
-
-			bottomf->PushPointerBackward2();
-			topf->PushPointerForward2();
-		}
-	}
-}
-
-void RCube::RotateU(int UP) {
-	if (UP > 0) {
-		for (int i = 0; i < UP; i ++) {
-			temp = front;	tempf = frontf;
-			front = top;	frontf = topf;	
-			top = back;		topf = backf;
-			back = bottom;	backf = bottomf;
-			bottom = temp;	bottomf = tempf;
-
-			leftf->PushPointerForward2();
-			rightf->PushPointerBackward2();
-			topf->PushPointerForward2();
-			topf->PushPointerForward2();
-			backf->PushPointerForward2();
-			backf->PushPointerForward2();
-		}
-	} else {
-		for (int i = 0; i < -UP; i ++) {
-			temp = front;	tempf = frontf;
-			front = bottom;	frontf = bottomf;
-			bottom = back;	bottomf = backf;
-			back = top;		backf = topf;
-			top = temp;		topf = tempf;
-
-			leftf->PushPointerBackward2();
-			rightf->PushPointerForward2();
-			backf->PushPointerBackward2();
-			backf->PushPointerBackward2();
-			bottomf->PushPointerForward2();
-			bottomf->PushPointerForward2();
-		}
-	}
-}
-
-void RCube::RotateY(int YAW) {
-	if (YAW > 0) {
-		for (int i = 0; i < YAW; i ++) {
-			temp = top;		tempf = topf;
-			top = left;		topf = leftf;
-			left = bottom;	leftf = bottomf;
-			bottom = right;	bottomf = rightf;
-			right = temp;	rightf = tempf;
-
-			frontf->PushPointerForward2();
-			backf->PushPointerBackward2();
-		}
-	} else {
-		for (int i = 0; i < -YAW; i ++) {
-			temp = top;		tempf = topf;
-			top = right;	topf = rightf;
-			right = bottom;	rightf = bottomf;
-			bottom = left;	bottomf = leftf;
-			left = temp;	leftf = tempf;
-
-			frontf->PushPointerBackward2();
-			backf->PushPointerForward2();
-		}
-	}
-}
-
-void RCube::Red(int dir) {
-	if (dir > 0) {
-		for (int i = 0; i < dir; i ++)  {
-			gu0->PushForward3();
-			rf->PushBackward2();
-		}
-	} else {
-		for (int i = 0; i < -dir; i ++) {
-			gu0->PushBackward3();
-			rf->PushForward2();
-		}
-	}
-}
-
-void RCube::Green(int dir) {
-	if (dir > 0) {
-		for (int i = 0; i < dir; i ++)  {
-			yu2->PushBackward3();
-			gf->PushBackward2();
-		}
-	} else {
-		for (int i = 0; i < -dir; i ++) {
-			yu2->PushForward3();
-			gf->PushForward2();
-		}
-	}
-}
-
-void RCube::Orange(int dir) {
-	if (dir > 0) {
-		for (int i = 0; i < dir; i ++)  {
-			gu2->PushBackward3();
-			of->PushBackward2();
-		}
-	} else {
-		for (int i = 0; i < -dir; i ++) {
-			gu2->PushForward3();
-			of->PushForward2();
-		}
-	}
-}
-
-void RCube::Blue(int dir) {
-	if (dir > 0) {
-		for (int i = 0; i < dir; i ++)  {
-			yu0->PushForward3();
-			bf->PushBackward2();
-		}
-	} else {
-		for (int i = 0; i < -dir; i ++) {
-			yu0->PushBackward3();
-			bf->PushForward2();
-		}
-	}
-}
-
-void RCube::Yellow(int dir) {
-	if (dir > 0) {
-		for (int i = 0; i < dir; i ++)  {
-			rh2->PushForward3();
-			yf->PushBackward2();
-		}
-	} else {
-		for (int i = 0; i < -dir; i ++) {
-			rh2->PushBackward3();
-			yf->PushForward2();
-		}
-	}
-}
-
-void RCube::White(int dir) {
-	if (dir > 0) {
-		for (int i = 0; i < dir; i ++)  {
-			rh0->PushBackward3();
-			wf->PushBackward2();
-		}
-	} else {
-		for (int i = 0; i < -dir; i ++) {
-			rh0->PushForward3();
-			wf->PushForward2();
-		}
 	}
 }
 
@@ -1523,4 +1310,326 @@ int RCube::GetDistance(char currFace, char face1, char face2) {
 	if (!currFaceIncluded && (currFace == 'o' || currFace == 'y' || currFace == 'g')) dir = -dir;
 
 	return dir;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// =============================================================================================================================================
+// Printing ------------------------------------------------------------------------------------------------------------------------------------
+// =============================================================================================================================================
+void RCube::Print(void) {
+	PrintRed();
+	PrintGreen();
+	PrintOrange();
+	PrintBlue();
+	PrintYellow();
+	PrintWhite();
+}
+
+// Prints this colored side of the face 0, 0 being bottom left corner (white being top / red being front / blue being right)
+void RCube::PrintRed(void) {
+	cout << "Red";
+	if (rf == frontf) cout << " (front)";
+	else if (rf == topf) cout << " (top)";
+	else if (rf == rightf) cout << " (right)";
+	cout << endl;
+	cout << *rf->Get(0) << " " << *rf->Get(1) << " " << *rf->Get(2) << "\n";
+	cout << *rf->Get(7) << " r " << *rf->Get(3) << "\n";
+	cout << *rf->Get(6) << " " << *rf->Get(5) << " " << *rf->Get(4) << "\n";
+}
+
+void RCube::PrintBlue(void) {
+	cout << "Blue";
+	if (bf == frontf) cout << " (front)";
+	else if (bf == topf) cout << " (top)";
+	else if (bf == rightf) cout << " (right)";
+	cout << endl;
+	cout << *bf->Get(0) << " " << *bf->Get(1) << " " << *bf->Get(2) << "\n";
+	cout << *bf->Get(7) << " b " << *bf->Get(3) << "\n";
+	cout << *bf->Get(6) << " " << *bf->Get(5) << " " << *bf->Get(4) << "\n";
+}
+
+void RCube::PrintOrange(void) {
+	cout << "Orange";
+	if (of == frontf) cout << " (front)";
+	else if (of == topf) cout << " (top)";
+	else if (of == rightf) cout << " (right)";
+	cout << endl;
+	cout << *of->Get(0) << " " << *of->Get(1) << " " << *of->Get(2) << "\n";
+	cout << *of->Get(7) << " o " << *of->Get(3) << "\n";
+	cout << *of->Get(6) << " " << *of->Get(5) << " " << *of->Get(4) << "\n";
+}
+
+void RCube::PrintGreen(void) {
+	cout << "Green";
+	if (gf == frontf) cout << " (front)";
+	else if (gf == topf) cout << " (top)";
+	else if (gf == rightf) cout << " (right)";
+	cout << endl;
+	cout << *gf->Get(0) << " " << *gf->Get(1) << " " << *gf->Get(2) << "\n";
+	cout << *gf->Get(7) << " g " << *gf->Get(3) << "\n";
+	cout << *gf->Get(6) << " " << *gf->Get(5) << " " << *gf->Get(4) << "\n";
+}
+
+void RCube::PrintWhite(void) {
+	cout << "White";
+	if (wf == frontf) cout << " (front)";
+	else if (wf == topf) cout << " (top)";
+	else if (wf == rightf) cout << " (right)";
+	cout << endl;
+	cout << *wf->Get(0) << " " << *wf->Get(1) << " " << *wf->Get(2) << "\n";
+	cout << *wf->Get(7) << " w " << *wf->Get(3) << "\n";
+	cout << *wf->Get(6) << " " << *wf->Get(5) << " " << *wf->Get(4) << "\n";
+}
+
+void RCube::PrintYellow(void) {
+	cout << "Yellow";
+	if (yf == frontf) cout << " (front)";
+	else if (yf == topf) cout << " (top)";
+	else if (yf == rightf) cout << " (right)";
+	cout << endl;
+	cout << *yf->Get(0) << " " << *yf->Get(1) << " " << *yf->Get(2) << "\n";
+	cout << *yf->Get(7) << " y " << *yf->Get(3) << "\n";
+	cout << *yf->Get(6) << " " << *yf->Get(5) << " " << *yf->Get(4) << "\n";
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// =============================================================================================================================================
+// Wrappers for relative rotating --------------------------------------------------------------------------------------------------------------
+// =============================================================================================================================================
+void RCube::Left(int dir) {
+	(this->*left)(dir);
+}
+
+void RCube::Right(int dir) {
+	(this->*right)(dir);
+}
+
+void RCube::Top(int dir) {
+	(this->*top)(dir);
+}
+
+void RCube::Bottom(int dir) {
+	(this->*bottom)(dir);
+}
+
+void RCube::Front(int dir) {
+	(this->*front)(dir);
+}
+
+void RCube::Back(int dir) {
+	(this->*back)(dir);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// =============================================================================================================================================
+// Full Cube rotations -------------------------------------------------------------------------------------------------------------------------
+// =============================================================================================================================================
+void RCube::RotateH(int RIGHT) {
+	if (RIGHT > 0) {
+		for (int i = 0; i < RIGHT; i ++) {
+			temp = front;	tempf = frontf;
+			front = left;	frontf = leftf;
+			left = back;	leftf = backf;
+			back = right;	backf = rightf;
+			right = temp;	rightf = tempf;
+
+			bottomf->PushPointerForward2();
+			topf->PushPointerBackward2();
+		}
+	} else {
+		for (int i = 0; i < -RIGHT; i ++) {
+			temp = front;	tempf = frontf;
+			front = right;	frontf = rightf;
+			right = back;	rightf = backf;
+			back = left;	backf = leftf;
+			left = temp; 	leftf = tempf;
+
+			bottomf->PushPointerBackward2();
+			topf->PushPointerForward2();
+		}
+	}
+}
+
+void RCube::RotateU(int UP) {
+	if (UP > 0) {
+		for (int i = 0; i < UP; i ++) {
+			temp = front;	tempf = frontf;
+			front = top;	frontf = topf;
+			top = back;		topf = backf;
+			back = bottom;	backf = bottomf;
+			bottom = temp;	bottomf = tempf;
+
+			leftf->PushPointerForward2();
+			rightf->PushPointerBackward2();
+			topf->PushPointerForward2();
+			topf->PushPointerForward2();
+			backf->PushPointerForward2();
+			backf->PushPointerForward2();
+		}
+	} else {
+		for (int i = 0; i < -UP; i ++) {
+			temp = front;	tempf = frontf;
+			front = bottom;	frontf = bottomf;
+			bottom = back;	bottomf = backf;
+			back = top;		backf = topf;
+			top = temp;		topf = tempf;
+
+			leftf->PushPointerBackward2();
+			rightf->PushPointerForward2();
+			backf->PushPointerBackward2();
+			backf->PushPointerBackward2();
+			bottomf->PushPointerForward2();
+			bottomf->PushPointerForward2();
+		}
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// =============================================================================================================================================
+// Absolute rotations --------------------------------------------------------------------------------------------------------------------------
+// =============================================================================================================================================
+void RCube::Red(int dir) {
+	if (dir > 0) {
+		for (int i = 0; i < dir; i ++)  {
+			gu0->PushForward3();
+			rf->PushBackward2();
+		}
+	} else {
+		for (int i = 0; i < -dir; i ++) {
+			gu0->PushBackward3();
+			rf->PushForward2();
+		}
+	}
+}
+
+void RCube::Green(int dir) {
+	if (dir > 0) {
+		for (int i = 0; i < dir; i ++)  {
+			yu2->PushBackward3();
+			gf->PushBackward2();
+		}
+	} else {
+		for (int i = 0; i < -dir; i ++) {
+			yu2->PushForward3();
+			gf->PushForward2();
+		}
+	}
+}
+
+void RCube::Orange(int dir) {
+	if (dir > 0) {
+		for (int i = 0; i < dir; i ++)  {
+			gu2->PushBackward3();
+			of->PushBackward2();
+		}
+	} else {
+		for (int i = 0; i < -dir; i ++) {
+			gu2->PushForward3();
+			of->PushForward2();
+		}
+	}
+}
+
+void RCube::Blue(int dir) {
+	if (dir > 0) {
+		for (int i = 0; i < dir; i ++)  {
+			yu0->PushForward3();
+			bf->PushBackward2();
+		}
+	} else {
+		for (int i = 0; i < -dir; i ++) {
+			yu0->PushBackward3();
+			bf->PushForward2();
+		}
+	}
+}
+
+void RCube::Yellow(int dir) {
+	if (dir > 0) {
+		for (int i = 0; i < dir; i ++)  {
+			rh2->PushForward3();
+			yf->PushBackward2();
+		}
+	} else {
+		for (int i = 0; i < -dir; i ++) {
+			rh2->PushBackward3();
+			yf->PushForward2();
+		}
+	}
+}
+
+void RCube::White(int dir) {
+	if (dir > 0) {
+		for (int i = 0; i < dir; i ++)  {
+			rh0->PushBackward3();
+			wf->PushBackward2();
+		}
+	} else {
+		for (int i = 0; i < -dir; i ++) {
+			rh0->PushForward3();
+			wf->PushForward2();
+		}
+	}
 }

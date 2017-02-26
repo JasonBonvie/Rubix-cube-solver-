@@ -45,19 +45,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /usr/local/Cellar/cmake/3.7.0/bin/cmake
+CMAKE_COMMAND = /usr/local/Cellar/cmake/3.7.2/bin/cmake
 
 # The command to remove a file.
-RM = /usr/local/Cellar/cmake/3.7.0/bin/cmake -E remove -f
+RM = /usr/local/Cellar/cmake/3.7.2/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/william/Documents/Sublime/RubixCube/RubixCube6
+CMAKE_SOURCE_DIR = /Users/william/Documents/Git/teamProject/RubixCube6
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/william/Documents/Sublime/RubixCube/RubixCube6
+CMAKE_BINARY_DIR = /Users/william/Documents/Git/teamProject/RubixCube6
 
 #=============================================================================
 # Target rules for target CMakeFiles/Rubix.dir
@@ -66,7 +66,7 @@ CMAKE_BINARY_DIR = /Users/william/Documents/Sublime/RubixCube/RubixCube6
 CMakeFiles/Rubix.dir/all:
 	$(MAKE) -f CMakeFiles/Rubix.dir/build.make CMakeFiles/Rubix.dir/depend
 	$(MAKE) -f CMakeFiles/Rubix.dir/build.make CMakeFiles/Rubix.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/william/Documents/Sublime/RubixCube/RubixCube6/CMakeFiles --progress-num=1,2,3,4 "Built target Rubix"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/william/Documents/Git/teamProject/RubixCube6/CMakeFiles --progress-num=1,2,3,4 "Built target Rubix"
 .PHONY : CMakeFiles/Rubix.dir/all
 
 # Include target in all.
@@ -76,9 +76,9 @@ all: CMakeFiles/Rubix.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/Rubix.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/william/Documents/Sublime/RubixCube/RubixCube6/CMakeFiles 4
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/william/Documents/Git/teamProject/RubixCube6/CMakeFiles 4
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/Rubix.dir/all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/william/Documents/Sublime/RubixCube/RubixCube6/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/william/Documents/Git/teamProject/RubixCube6/CMakeFiles 0
 .PHONY : CMakeFiles/Rubix.dir/rule
 
 # Convenience name for target.
