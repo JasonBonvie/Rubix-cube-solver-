@@ -1,10 +1,10 @@
 #include <iostream>
-#include "RCube.hpp"
+#include "RCubeSolver.hpp"
 
 using namespace std;
 
 int main() {
-	RCube* rubixCube = new RCube();
+	RCubeSolver* rubixCube = new RCubeSolver();
 	rubixCube->Shuffle();
 	rubixCube->Print();
 	rubixCube->Solve();

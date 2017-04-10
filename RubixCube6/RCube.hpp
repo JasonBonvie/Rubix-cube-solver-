@@ -9,10 +9,8 @@ class RCube {
 public:
 	RCube(void);
 	void Print(void);
-	void Shuffle(void);
-	void Solve(void);
 
-private:
+protected:
 	// Horizontal and vertical shift arrays
 	ShiftArray* rh0;
 	ShiftArray* rh1;
@@ -67,18 +65,6 @@ private:
 	std::map<ShiftArray*, char> *ShiftToNameAbsolute;
 	std::map<ShiftArray*, char> *ShiftToNameRelative;
 
-	// Callback functions and mapping them to the solving functions
-	typedef void (RCube::*Callback)(void);
-	std::map<bool*, Callback> *MatrixMap;
-
-	// Top Solving algorithms
-	void Algorithm1(void);
-	void Algorithm1Inverse(void);
-	void Algorithm2(void);
-	void Algorithm4(void);
-	void Algorithm5(void);
-	void Algorithm2Inverse(void);
-
 	// Change reference frame
 	void RotateH(int RIGHT);
 	void RotateU(int UP);
@@ -102,21 +88,9 @@ private:
 	void Back(int dir);
 
 	// Location
-	void GetLocation(char* piece, bool relative, int (&result)[2]);
+	int GetLocation(char* piece, bool relative, int (&result)[2]);
 	int GetLocationOnYellow(char* piece);
 	int GetDistance(char currFace, char face1, char face2);
-
-	// Solving
-	void SolveCWhite(char* piece);
-	void SolveWhiteCC(char* white, char* color1, char* color2);
-	void SolveCC(char* color1, char* color2);
-
-	// Top Solving
-	void OrganizeTopCorners(char side, char* piece1, char* piece2);
-	void SwitchTopCorners(char* piece);
-	void SwitchTopMids(char* piece);
-	void OrientAllPieces(void);
-	void SolveTop(void);
 };
 
 #endif

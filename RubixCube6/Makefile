@@ -39,19 +39,19 @@ cmake_force:
 SHELL = /bin/sh
 
 # The CMake executable.
-CMAKE_COMMAND = /usr/local/Cellar/cmake/3.7.2/bin/cmake
+CMAKE_COMMAND = /usr/local/Cellar/cmake/3.7.0/bin/cmake
 
 # The command to remove a file.
-RM = /usr/local/Cellar/cmake/3.7.2/bin/cmake -E remove -f
+RM = /usr/local/Cellar/cmake/3.7.0/bin/cmake -E remove -f
 
 # Escaping for special characters.
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /Users/william/Documents/Git/teamProject/RubixCube6
+CMAKE_SOURCE_DIR = /Users/william/GitHub/teamProject/RubixCube6
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /Users/william/Documents/Git/teamProject/RubixCube6
+CMAKE_BINARY_DIR = /Users/william/GitHub/teamProject/RubixCube6
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /Users/william/Documents/Git/teamProject/RubixCube6
 # Special rule for the target rebuild_cache
 rebuild_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake to regenerate build system..."
-	/usr/local/Cellar/cmake/3.7.2/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/usr/local/Cellar/cmake/3.7.0/bin/cmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : rebuild_cache
 
 # Special rule for the target rebuild_cache
@@ -70,7 +70,7 @@ rebuild_cache/fast: rebuild_cache
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running CMake cache editor..."
-	/usr/local/Cellar/cmake/3.7.2/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
+	/usr/local/Cellar/cmake/3.7.0/bin/ccmake -H$(CMAKE_SOURCE_DIR) -B$(CMAKE_BINARY_DIR)
 .PHONY : edit_cache
 
 # Special rule for the target edit_cache
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/william/Documents/Git/teamProject/RubixCube6/CMakeFiles /Users/william/Documents/Git/teamProject/RubixCube6/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/william/GitHub/teamProject/RubixCube6/CMakeFiles /Users/william/GitHub/teamProject/RubixCube6/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/william/Documents/Git/teamProject/RubixCube6/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/william/GitHub/teamProject/RubixCube6/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -150,6 +150,33 @@ RCube.cpp.s:
 	$(MAKE) -f CMakeFiles/Rubix.dir/build.make CMakeFiles/Rubix.dir/RCube.cpp.s
 .PHONY : RCube.cpp.s
 
+RCubeSolver.o: RCubeSolver.cpp.o
+
+.PHONY : RCubeSolver.o
+
+# target to build an object file
+RCubeSolver.cpp.o:
+	$(MAKE) -f CMakeFiles/Rubix.dir/build.make CMakeFiles/Rubix.dir/RCubeSolver.cpp.o
+.PHONY : RCubeSolver.cpp.o
+
+RCubeSolver.i: RCubeSolver.cpp.i
+
+.PHONY : RCubeSolver.i
+
+# target to preprocess a source file
+RCubeSolver.cpp.i:
+	$(MAKE) -f CMakeFiles/Rubix.dir/build.make CMakeFiles/Rubix.dir/RCubeSolver.cpp.i
+.PHONY : RCubeSolver.cpp.i
+
+RCubeSolver.s: RCubeSolver.cpp.s
+
+.PHONY : RCubeSolver.s
+
+# target to generate assembly for a file
+RCubeSolver.cpp.s:
+	$(MAKE) -f CMakeFiles/Rubix.dir/build.make CMakeFiles/Rubix.dir/RCubeSolver.cpp.s
+.PHONY : RCubeSolver.cpp.s
+
 ShiftArray.o: ShiftArray.cpp.o
 
 .PHONY : ShiftArray.o
@@ -216,6 +243,9 @@ help:
 	@echo "... RCube.o"
 	@echo "... RCube.i"
 	@echo "... RCube.s"
+	@echo "... RCubeSolver.o"
+	@echo "... RCubeSolver.i"
+	@echo "... RCubeSolver.s"
 	@echo "... ShiftArray.o"
 	@echo "... ShiftArray.i"
 	@echo "... ShiftArray.s"

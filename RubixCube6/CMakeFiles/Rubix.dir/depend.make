@@ -6,12 +6,19 @@ CMakeFiles/Rubix.dir/RCube.cpp.o: RCube.cpp
 CMakeFiles/Rubix.dir/RCube.cpp.o: RCube.hpp
 CMakeFiles/Rubix.dir/RCube.cpp.o: ShiftArray.hpp
 
+CMakeFiles/Rubix.dir/RCubeSolver.cpp.o: INode.hpp
+CMakeFiles/Rubix.dir/RCubeSolver.cpp.o: RCube.hpp
+CMakeFiles/Rubix.dir/RCubeSolver.cpp.o: RCubeSolver.cpp
+CMakeFiles/Rubix.dir/RCubeSolver.cpp.o: RCubeSolver.hpp
+CMakeFiles/Rubix.dir/RCubeSolver.cpp.o: ShiftArray.hpp
+
 CMakeFiles/Rubix.dir/ShiftArray.cpp.o: INode.hpp
 CMakeFiles/Rubix.dir/ShiftArray.cpp.o: ShiftArray.cpp
 CMakeFiles/Rubix.dir/ShiftArray.cpp.o: ShiftArray.hpp
 
 CMakeFiles/Rubix.dir/rubix.cpp.o: INode.hpp
 CMakeFiles/Rubix.dir/rubix.cpp.o: RCube.hpp
+CMakeFiles/Rubix.dir/rubix.cpp.o: RCubeSolver.hpp
 CMakeFiles/Rubix.dir/rubix.cpp.o: ShiftArray.hpp
 CMakeFiles/Rubix.dir/rubix.cpp.o: rubix.cpp
 

@@ -9,5 +9,7 @@ add_executable(Rubix
 	ShiftArray.hpp
 	RCube.cpp
 	RCube.hpp
+	RCubeSolver.cpp
+	RCubeSolver.hpp
 	INode.hpp
 )

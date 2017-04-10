@@ -4,9 +4,10 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/Users/william/Documents/Git/teamProject/RubixCube6/RCube.cpp" "/Users/william/Documents/Git/teamProject/RubixCube6/CMakeFiles/Rubix.dir/RCube.cpp.o"
-  "/Users/william/Documents/Git/teamProject/RubixCube6/ShiftArray.cpp" "/Users/william/Documents/Git/teamProject/RubixCube6/CMakeFiles/Rubix.dir/ShiftArray.cpp.o"
-  "/Users/william/Documents/Git/teamProject/RubixCube6/rubix.cpp" "/Users/william/Documents/Git/teamProject/RubixCube6/CMakeFiles/Rubix.dir/rubix.cpp.o"
+  "/Users/william/GitHub/teamProject/RubixCube6/RCube.cpp" "/Users/william/GitHub/teamProject/RubixCube6/CMakeFiles/Rubix.dir/RCube.cpp.o"
+  "/Users/william/GitHub/teamProject/RubixCube6/RCubeSolver.cpp" "/Users/william/GitHub/teamProject/RubixCube6/CMakeFiles/Rubix.dir/RCubeSolver.cpp.o"
+  "/Users/william/GitHub/teamProject/RubixCube6/ShiftArray.cpp" "/Users/william/GitHub/teamProject/RubixCube6/CMakeFiles/Rubix.dir/ShiftArray.cpp.o"
+  "/Users/william/GitHub/teamProject/RubixCube6/rubix.cpp" "/Users/william/GitHub/teamProject/RubixCube6/CMakeFiles/Rubix.dir/rubix.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "Clang")
 
