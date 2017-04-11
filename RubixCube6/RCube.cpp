@@ -1,6 +1,7 @@
 #include "RCube.hpp"
 #include "INode.hpp"
 #include <iostream>
+#include <fstream>
 
 using namespace std;
 
@@ -81,6 +82,46 @@ RCube::RCube(void) {
 	// 0 1 2
 	// 7   3
 	// 6 5 4
+
+	cout << "Please enter the input for the cube into input.txt follow the format in template.txt or for more information read instructions.txt" << endl;
+	cin.ignore();
+
+	string contents;
+	string line;
+	int j = 0;
+	ifstream myfile("input.txt");
+
+	if (myfile.is_open()) {
+    while (getline(myfile, line)) {
+      for (int i = 0; i < line.length(); i ++) {
+				switch(j) {
+					case 0:
+						*rfs[i] = line.at(i);
+						break;
+					case 1:
+						*gfs[i] = line.at(i);
+						break;
+					case 2:
+						*ofs[i] = line.at(i);
+						break;
+					case 3:
+						*bfs[i] = line.at(i);
+						break;
+					case 4:
+						*yfs[i] = line.at(i);
+						break;
+					case 5:
+						*wfs[i] = line.at(i);
+						break;
+				}
+			}
+			j ++;
+    }
+    myfile.close();
+  } else {
+    cout << "Unable to open file\n";
+    exit(0);
+  }
 
 	// Face based arrays
 	rf = new ShiftArray(rfs, 8);
@@ -600,12 +641,16 @@ void RCube::RotateU(int UP) {
 // Absolute rotations --------------------------------------------------------------------------------------------------------------------------
 // =============================================================================================================================================
 void RCube::Red(int dir) {
+	if (dir == 0) return;
+
 	if (dir > 0) {
+		cout << "Red face counterclockwise " << dir << " time(s)"<< endl;
 		for (int i = 0; i < dir; i ++)  {
 			gu0->PushForward3();
 			rf->PushBackward2();
 		}
 	} else {
+		cout << "Red face clockwise " << -dir << " time(s)"<< endl;
 		for (int i = 0; i < -dir; i ++) {
 			gu0->PushBackward3();
 			rf->PushForward2();
@@ -614,12 +659,16 @@ void RCube::Red(int dir) {
 }
 
 void RCube::Green(int dir) {
+	if (dir == 0) return;
+
 	if (dir > 0) {
+		cout << "Green face counterclockwise " << dir << " time(s)"<< endl;
 		for (int i = 0; i < dir; i ++)  {
 			yu2->PushBackward3();
 			gf->PushBackward2();
 		}
 	} else {
+		cout << "Green face clockwise " << -dir << " time(s)"<< endl;
 		for (int i = 0; i < -dir; i ++) {
 			yu2->PushForward3();
 			gf->PushForward2();
@@ -628,12 +677,16 @@ void RCube::Green(int dir) {
 }
 
 void RCube::Orange(int dir) {
+	if (dir == 0) return;
+
 	if (dir > 0) {
+		cout << "Orange face counterclockwise " << dir << " time(s)"<< endl;
 		for (int i = 0; i < dir; i ++)  {
 			gu2->PushBackward3();
 			of->PushBackward2();
 		}
 	} else {
+		cout << "Orange face clockwise " << -dir << " time(s)"<< endl;
 		for (int i = 0; i < -dir; i ++) {
 			gu2->PushForward3();
 			of->PushForward2();
@@ -642,12 +695,16 @@ void RCube::Orange(int dir) {
 }
 
 void RCube::Blue(int dir) {
+	if (dir == 0) return;
+
 	if (dir > 0) {
+		cout << "Blue face counterclockwise " << dir << " time(s)"<< endl;
 		for (int i = 0; i < dir; i ++)  {
 			yu0->PushForward3();
 			bf->PushBackward2();
 		}
 	} else {
+		cout << "Blue face clockwise " << -dir << " time(s)"<< endl;
 		for (int i = 0; i < -dir; i ++) {
 			yu0->PushBackward3();
 			bf->PushForward2();
@@ -656,12 +713,16 @@ void RCube::Blue(int dir) {
 }
 
 void RCube::Yellow(int dir) {
+	if (dir == 0) return;
+
 	if (dir > 0) {
+		cout << "Yellow face counterclockwise " << dir << " time(s)"<< endl;
 		for (int i = 0; i < dir; i ++)  {
 			rh2->PushForward3();
 			yf->PushBackward2();
 		}
 	} else {
+		cout << "Yellow face clockwise " << -dir << " time(s)"<< endl;
 		for (int i = 0; i < -dir; i ++) {
 			rh2->PushBackward3();
 			yf->PushForward2();
@@ -670,12 +731,16 @@ void RCube::Yellow(int dir) {
 }
 
 void RCube::White(int dir) {
+	if (dir == 0) return;
+
 	if (dir > 0) {
+		cout << "White face counterclockwise " << dir << " time(s)"<< endl;
 		for (int i = 0; i < dir; i ++)  {
 			rh0->PushBackward3();
 			wf->PushBackward2();
 		}
 	} else {
+		cout << "White face clockwise " << -dir << " time(s)"<< endl;
 		for (int i = 0; i < -dir; i ++) {
 			rh0->PushForward3();
 			wf->PushForward2();
