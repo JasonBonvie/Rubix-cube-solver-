@@ -1,5 +1,35 @@
 #include "input.h"
 
+void inputUI::constructPrintVector() {
+
+    vector< vector<char> > con(5, vector<char>(25, ' '));
+
+    printVector = con;
+
+    for (int i=0; i<6; i++)
+        printVector[0][2+(4*i)] = colorList[i];
+    
+    for (int i=0; i<7; i++) {
+        for (int j=0; j<5; j++)
+            printVector[j][4*i] = '|';
+   }
+
+}
+
+void inputUI::updatePrintVector() {
+    for (int i=0; i<6; i++) {
+        vector<char> face = cubeMap[colorList[i]];
+
+        if (face.empty()) continue;
+
+        for (int j=0; j<3; j++) {
+            for (int k=0; k<3; k++)
+                printVector[2+j][(i+1)+k+(3*i)] = face[k+(j*3)];
+        }
+    }
+}
+
+
 
 vector<char> inputUI::readLine() {
     char a;
@@ -43,18 +73,13 @@ void inputUI::printFace(vector<char> face) {
 
 
 void inputUI::printCube() {
-    char color;
-    vector<char> empty(9, ' ');
-
-    for (int i=0; i<6; i++) {
-        color = colorList[i];
-        cout << "----\n";
-        cout << " " << colorList[i] << "\n\n";
-        if (cubeMap[color].empty())
-            printFace(empty);
-        else
-            printFace(cubeMap[color]);
+    updatePrintVector();
+    for (vector<char> i : printVector) {
+        for (char j : i)
+            cout << j;
+        cout << endl;
     }
+    cout << endl;
 }
 
 
@@ -78,7 +103,7 @@ void inputUI::sanitizeFace(vector<char> face) {
     }
 
     if (badFace) {
-        cout << "Incorrect face format, please input again";
+        cout << "Incorrect face format, please input again\n";
         loop();
     } else {
         catagorizeFace(face);
@@ -96,21 +121,21 @@ void inputUI::loop() {
     }
 
     if (!emptyFlag) {
-        cout << "All faces have been filled\ntype Y to proceed to solving\n";
+        cout << "All faces have been filled\ntype Y to solve cube\n";
         cout << "type N to continue input\n";
-        cout << "or type P to print faces and continue input\n";
+        cout << "or type P to print faces and continue input\n\n";
         char choice;
         cin >> choice;
+        cout << endl;
         switch (choice) {
-            case 'Y': writeInput(); break;
-            case 'N': loop(); break;
-            case 'P': printCube(); loop(); break;
+            case 'Y': writeInput(); return; break;
+            case 'N': break;
+            case 'P': printCube(); break;
             default : 
                 cout << "Not valid input\n\n";
                 loop();
                 break; 
         }
-        return;
     }
             
     cout << ">" << endl;
@@ -164,6 +189,7 @@ void inputUI::writeInput() {
 
 inputUI::inputUI() {
     colorList = {'r', 'g','o','b','y','w'};
+    constructPrintVector();
     
     for (int i=0; i<6; i++)
         cubeMap[colorList[i]] = {};
@@ -180,9 +206,7 @@ void inputUI::start() {
     cout << "r - red, y - yellow, o - orange" << endl;
     cout << "Either input the 9 character face linearly, like so" << endl;
     cout << "\nrgrgrgrgr \n\nor 3x3 like this" << endl;
-    cout << "\nrgr\ngrg\nrgr\n" << endl;
-    cout << "\nYou may redo any side by typing --c where c is the" << endl;
-    cout << "The color character of the face you wish to redo" << endl;
+    cout << "\nrgr\ngrg\nrgr\n\n" << endl;
     loop();
 }
 

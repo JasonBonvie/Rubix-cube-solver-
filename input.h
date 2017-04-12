@@ -11,6 +11,10 @@ class inputUI {
     private:
         map< char, vector<char> > cubeMap;
         vector<char> colorList;
+        vector< vector<char> > printVector;
+
+        void constructPrintVector();
+        void updatePrintVector();
 
         vector<char> readLine();
         vector<char> concatV(vector<char>, vector<char>); 
