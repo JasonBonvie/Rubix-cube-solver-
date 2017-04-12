@@ -141,17 +141,6 @@ void inputUI::loop() {
     cout << ">" << endl;
     vector<char> first = readLine();
 
-    bool charFlag = false;
-    for (int i=0; i<3; i++) {
-        if (!isMember(first[i], colorList))
-            charFlag = true;
-    }
-
-    if (charFlag) {
-        cout << "I can't understand that input, can we start again?\n";
-        loop();
-        return;
-    }
     vector<char> second = readLine();
     vector<char> third = readLine();
     cout << endl;
