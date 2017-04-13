@@ -400,6 +400,7 @@ void RCube::Print(void) {
 }
 
 // Prints this colored side of the face 0, 0 being bottom left corner (white being top / red being front / blue being right)
+// Mainly done for debugging
 void RCube::PrintRed(void) {
 	cout << "Red";
 	if (rf == frontf) cout << " (front)";

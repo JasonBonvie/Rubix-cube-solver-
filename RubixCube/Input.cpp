@@ -50,22 +50,22 @@ void InputUI::printCube() {
         color = colorList[i];
         switch(i) {
           case 0:
-        cout << "Red ------" << endl;
+        cout << "Red (Yellow facing up) ------" << endl;
         break;
           case 1:
-        cout << "Green ----" << endl;
+        cout << "Green (Yellow facing up) ----" << endl;
         break;
           case 2:
-        cout << "Orange ---" << endl;
+        cout << "Orange (Yellow facing up) ---" << endl;
         break;
           case 3:
-        cout << "Blue -----" << endl;
+        cout << "Blue (Yellow facing up) -----" << endl;
         break;
           case 4:
-        cout << "Yellow ---" << endl;
+        cout << "Yellow (Orange facing up) --" << endl;
         break;
           case 5:
-        cout << "White ----" << endl;
+        cout << "White (Red facing up) ------" << endl;
         break;
         }
         if (cubeMap[color].empty())
@@ -98,7 +98,7 @@ void InputUI::sanitizeFace(vector<char> face) {
     if (badFace) {
         cout << "Incorrect face format, please input again";
         cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cin.ignore(1000, '\n');
         loop();
     } else {
         catagorizeFace(face);
@@ -123,18 +123,18 @@ void InputUI::loop() {
         switch (choice) {
             case 'Y':
               cin.clear();
-              cin.ignore(numeric_limits<streamsize>::max(), '\n');
+              cin.ignore(1000, '\n');
               writeInput();
               return;
               break;
             case 'N':
               cin.clear();
-              cin.ignore(numeric_limits<streamsize>::max(), '\n');
+              cin.ignore(1000, '\n');
               break;
             default :
               cout << "Not valid input\n\n";
               cin.clear();
-              cin.ignore(numeric_limits<streamsize>::max(), '\n');
+              cin.ignore(1000, '\n');
               loop();
               break;
         }
@@ -152,7 +152,7 @@ void InputUI::loop() {
     if (charFlag) {
         cout << "I can't understand that input, can we start again?\n";
         cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cin.ignore(1000, '\n');
         loop();
         return;
     }
@@ -167,7 +167,7 @@ void InputUI::loop() {
     if (charFlag) {
         cout << "I can't understand that input, can we start again?\n";
         cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cin.ignore(1000, '\n');
         loop();
         return;
     }
@@ -182,14 +182,14 @@ void InputUI::loop() {
     if (charFlag) {
         cout << "I can't understand that input, can we start again?\n";
         cin.clear();
-        cin.ignore(numeric_limits<streamsize>::max(), '\n');
+        cin.ignore(1000, '\n');
         loop();
         return;
     }
     cout << endl;
 
     cin.clear();
-    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+    cin.ignore(1000, '\n');
 
     vector<char> face = concatV(concatV(first,second), third);
 
