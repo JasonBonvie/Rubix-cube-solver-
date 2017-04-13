@@ -1,0 +1,6 @@
+
+*.cmake
+
+RubixCube/CMakeFiles/*
+
+RubixCube/Makefile
