@@ -41,18 +41,18 @@ void Output::Add(string color, int dir) {
     last->color = color;
     last->dir = dir;
   } else {
-    if (color != last->color) {
+    //if (color != last->color) {
       last->next = new OutputNode();
       last = last->next;
 
       last->color = color;
       last->dir = dir;
-    } else {
+    /*} else {
       last->Add(dir);
       if (last->dir == 0) {
         RemoveLast();
       }
-    }
+    }*/
   }
 
   if (liveAdd) {
