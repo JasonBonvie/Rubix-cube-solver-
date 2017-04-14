@@ -614,7 +614,7 @@ void RCube::RotateU(int UP) {
 void RCube::Red(int dir) {
 	if (dir == 0) return;
 	out->Add("Red", dir);
-	cout << "Red" << dir << endl;
+	//cout << "Red" << dir << endl;
 
 	if (dir > 0) {
 		for (int i = 0; i < dir; i ++)  {
@@ -632,7 +632,7 @@ void RCube::Red(int dir) {
 void RCube::Green(int dir) {
 	if (dir == 0) return;
 	out->Add("Green", dir);
-	cout << "Green" << dir << endl;
+	//cout << "Green" << dir << endl;
 
 
 	if (dir > 0) {
@@ -651,7 +651,7 @@ void RCube::Green(int dir) {
 void RCube::Orange(int dir) {
 	if (dir == 0) return;
 	out->Add("Orange", dir);
-	cout << "Orange" << dir << endl;
+	//cout << "Orange" << dir << endl;
 
 
 	if (dir > 0) {
@@ -670,7 +670,7 @@ void RCube::Orange(int dir) {
 void RCube::Blue(int dir) {
 	if (dir == 0) return;
 	out->Add("Blue", dir);
-	cout << "Blue" << dir << endl;
+	//cout << "Blue" << dir << endl;
 
 
 	if (dir > 0) {
@@ -689,7 +689,7 @@ void RCube::Blue(int dir) {
 void RCube::Yellow(int dir) {
 	if (dir == 0) return;
 	out->Add("Yellow", dir);
-	cout << "Yellow" << dir << endl;
+	//cout << "Yellow" << dir << endl;
 
 
 	if (dir > 0) {
@@ -708,7 +708,7 @@ void RCube::Yellow(int dir) {
 void RCube::White(int dir) {
 	if (dir == 0) return;
 	out->Add("White", dir);
-	cout << "White" << dir << endl;
+	//cout << "White" << dir << endl;
 
 
 	if (dir > 0) {
