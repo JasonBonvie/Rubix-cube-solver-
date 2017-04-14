@@ -1,0 +1,3 @@
+/Users/jasonbonvie/teamProject/RubixCube/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/jasonbonvie/teamProject/RubixCube/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/jasonbonvie/teamProject/RubixCube/cmake-build-debug/CMakeFiles/Rubix.dir

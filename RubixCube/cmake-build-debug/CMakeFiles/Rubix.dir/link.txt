@@ -1,0 +1,1 @@
+/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++   -g -Wl,-search_paths_first -Wl,-headerpad_max_install_names  CMakeFiles/Rubix.dir/rubix.cpp.o CMakeFiles/Rubix.dir/ShiftArray.cpp.o CMakeFiles/Rubix.dir/RCube.cpp.o CMakeFiles/Rubix.dir/RCubeSolver.cpp.o CMakeFiles/Rubix.dir/Input.cpp.o CMakeFiles/Rubix.dir/Output.cpp.o  -o Rubix  

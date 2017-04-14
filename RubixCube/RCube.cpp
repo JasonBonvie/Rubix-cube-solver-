@@ -84,7 +84,7 @@ RCube::RCube(void) {
 	// 0 1 2
 	// 7   3
 	// 6 5 4
-	//InputUI(rfs, gfs, ofs, bfs, yfs, wfs);
+	InputUI(rfs, gfs, ofs, bfs, yfs, wfs);
 
 
 	// Face based arrays
