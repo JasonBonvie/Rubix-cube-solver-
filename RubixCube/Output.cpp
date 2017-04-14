@@ -31,6 +31,7 @@ void OutputNode::Add(int dir) {
 Output::Output(void) {
   first = nullptr;
   last = nullptr;
+  liveAdd = false;
 }
 
 void Output::Add(string color, int dir) {
