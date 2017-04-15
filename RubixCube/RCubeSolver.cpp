@@ -808,11 +808,13 @@ void RCubeSolver::SolveCWhite(char* piece) {
   RotateHUntil(piece[0]);
 	GetLocation(piece, location);
 
+
   int locationBackwards[2];
   char* pieceBackwards = new char[2];
   pieceBackwards[1] = piece[0];
   pieceBackwards[0] = piece[1];
   GetLocation(pieceBackwards, locationBackwards);
+
   if (locationBackwards[0] == 'y') {
     // White is facing up
     int turns = (locationBackwards[1] - 5) / 2;
@@ -839,6 +841,7 @@ void RCubeSolver::SolveCWhite(char* piece) {
 
       GetLocation(piece, location);
       GetLocation(pieceBackwards, locationBackwards);
+
     }
 
     RotateHUntil(location[0]);
@@ -846,6 +849,7 @@ void RCubeSolver::SolveCWhite(char* piece) {
 
     int bottomTurns = GetDistance(piece[0], location[0], piece[0]);
     Bottom(bottomTurns);
+
     if (location[1] == 3) {
       Front(-1);
       Bottom(-bottomTurns);
@@ -854,6 +858,7 @@ void RCubeSolver::SolveCWhite(char* piece) {
       Front(1);
       Bottom(-bottomTurns);
     }
+
   }
 }
 

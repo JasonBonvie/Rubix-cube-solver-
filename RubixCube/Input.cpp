@@ -132,22 +132,21 @@ void InputUI::loop() {
         cout << "type N to continue input\n";
         char choice;
         cin >> choice;
+
+        cin.clear();
+        cin.ignore(1000, '\n');
+
         switch (choice) {
             case 'Y':
-              cin.clear();
-              cin.ignore(1000, '\n');
               writeInput();
               return;
               break;
             case 'N':
-              cin.clear();
-              cin.ignore(1000, '\n');
               break;
             default :
               cout << "Not valid input\n\n";
-              cin.clear();
-              cin.ignore(1000, '\n');
               loop();
+              return;
               break;
         }
     }

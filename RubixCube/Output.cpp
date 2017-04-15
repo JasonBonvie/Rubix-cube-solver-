@@ -111,7 +111,8 @@ void Output::Add(string color, int dir) {
 void Output::RemoveLast(void) {
   if (last) {
     last = last->previous;
-    if (!last) {
+    if (last) last->next = nullptr;
+    else {
       first = nullptr;
     }
   }
