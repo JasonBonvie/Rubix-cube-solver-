@@ -134,12 +134,12 @@ RCubeSolver::RCubeSolver(void) {
 
   	/*
   	0 0 0
-  	0   1
+  	1   0
   	0 1 0
   	*/
   	MatrixMap->insert(make_pair(new bool[8] {
-  		0, 0, 0, 1, 0, 1, 0, 0
-  	}, &RCubeSolver::Algorithm2Inverse));
+  		0, 0, 0, 0, 0, 1, 0, 1
+  	}, &RCubeSolver::Algorithm2));
 
   	/*
   	1 0 1
@@ -151,12 +151,12 @@ RCubeSolver::RCubeSolver(void) {
   	}, &RCubeSolver::Algorithm2));
 
   	/*
-  	1 1 0
-  	0   0
   	0 1 1
+  	0   0
+  	1 1 0
   	*/
   	MatrixMap->insert(make_pair(new bool[8] {
-  		1, 1, 0, 0, 1, 1, 0, 0
+  		0, 1, 1, 0, 0, 1, 1, 0
   	}, &RCubeSolver::Algorithm2));
 
   	/*
